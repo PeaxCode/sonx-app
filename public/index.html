@@ -136,90 +136,122 @@
         /* Download Button */
         .download-btn {
             position: relative;
-            padding: 18px 48px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 20px 48px;
+            font-size: 18px;
+            font-weight: 700;
             color: #000;
-            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+            background: linear-gradient(135deg, #fff 0%, #e8e8e8 100%);
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            overflow: hidden;
+            overflow: visible;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:
-                0 0 0 0 rgba(255, 255, 255, 0.4),
-                0 4px 20px rgba(0, 0, 0, 0.3);
-            animation: pulse-glow 2s ease-in-out infinite;
+                0 0 0 0 rgba(255, 255, 255, 0.6),
+                0 4px 20px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(255, 255, 255, 0.1);
+            animation: breathe 2.5s ease-in-out infinite;
         }
 
         .download-btn:hover {
-            transform: translateY(-2px) scale(1.02);
+            transform: translateY(-2px) scale(1.03);
             box-shadow:
-                0 0 0 15px rgba(255, 255, 255, 0.1),
+                0 0 0 20px rgba(255, 255, 255, 0.15),
                 0 8px 30px rgba(255, 255, 255, 0.2),
-                0 0 60px rgba(255, 255, 255, 0.1);
+                0 0 60px rgba(255, 255, 255, 0.2);
+            animation: breathe-fast 1.5s ease-in-out infinite;
         }
 
         .download-btn:active {
             transform: translateY(0) scale(0.98);
         }
 
-        /* Shimmer Effect */
+        /* Breathing Glow Ring */
         .download-btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.6),
-                transparent
-            );
-            transition: left 0.5s ease;
-        }
-
-        .download-btn:hover::before {
-            left: 100%;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            animation: breathe-ring 2.5s ease-in-out infinite;
+            pointer-events: none;
         }
 
         /* Button Content */
         .btn-content {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             position: relative;
             z-index: 1;
+            width: 100%;
         }
 
         .download-icon {
             width: 20px;
             height: 20px;
-            animation: bounce 1.5s ease-in-out infinite;
+            animation: icon-pulse 2.5s ease-in-out infinite;
         }
 
         /* Animations */
-        @keyframes pulse-glow {
+        @keyframes breathe {
             0%, 100% {
+                transform: scale(1);
                 box-shadow:
-                    0 0 0 0 rgba(255, 255, 255, 0.4),
-                    0 4px 20px rgba(0, 0, 0, 0.3);
+                    0 0 0 0 rgba(255, 255, 255, 0.6),
+                    0 4px 20px rgba(0, 0, 0, 0.3),
+                    0 0 40px rgba(255, 255, 255, 0.1);
             }
             50% {
+                transform: scale(1.05);
                 box-shadow:
-                    0 0 0 8px rgba(255, 255, 255, 0.1),
-                    0 4px 25px rgba(255, 255, 255, 0.15);
+                    0 0 0 15px rgba(255, 255, 255, 0.3),
+                    0 4px 25px rgba(0, 0, 0, 0.3),
+                    0 0 60px rgba(255, 255, 255, 0.25);
             }
         }
 
-        @keyframes bounce {
+        @keyframes breathe-fast {
             0%, 100% {
-                transform: translateY(0);
+                transform: translateY(-2px) scale(1.03);
+                box-shadow:
+                    0 0 0 15px rgba(255, 255, 255, 0.15),
+                    0 8px 30px rgba(255, 255, 255, 0.2),
+                    0 0 60px rgba(255, 255, 255, 0.2);
             }
             50% {
-                transform: translateY(3px);
+                transform: translateY(-2px) scale(1.06);
+                box-shadow:
+                    0 0 0 25px rgba(255, 255, 255, 0.25),
+                    0 8px 35px rgba(255, 255, 255, 0.3),
+                    0 0 80px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        @keyframes breathe-ring {
+            0%, 100% {
+                width: 100%;
+                height: 100%;
+                opacity: 0.8;
+            }
+            50% {
+                width: 115%;
+                height: 115%;
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes icon-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.15);
             }
         }
 
@@ -275,10 +307,15 @@
         /* Store badges */
         /* Mobile adjustments */
         @media (max-width: 768px) {
+            body {
+                align-items: center;
+            }
+
             .download-section {
-                margin-top: 20px;
-                padding: 380px 24px;
-                width: 85%;
+                margin-top: auto;
+                margin-bottom: 12px;
+                padding: 0 24px;
+                width: 100%;
                 box-sizing: border-box;
                 align-items: center;
             }
@@ -288,16 +325,25 @@
             }
 
             .download-btn {
-                padding: 14px 32px;
-                font-size: 15px;
-                width: 100%;
-                max-width: 100%;
+                padding: 22px 40px;
+                font-size: 18px;
+                width: 85%;
+                max-width: 300px;
                 box-sizing: border-box;
+            }
+
+            .download-icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            .btn-content {
+                gap: 12px;
             }
         }
     </style>
 </head>
-<body>
+<body onclick="handleBodyClick(event)">
 
     <!-- Floating Particles Background -->
     <div class="particles">
@@ -332,7 +378,7 @@
 
     <script>
         // ADJUNST LİNKLERİNİ BURAYA YAPIŞTIR
-        const IOS_LINK = "https://aimusicgeneratorsonx.go.link/7rpMY"; 
+        const IOS_LINK = "https://aimusicgeneratorsonx.go.link/7rpMY";
         const ANDROID_LINK = "https://aimusicgeneratorsonx.go.link/7rpMY";
         const DEFAULT_LINK = "https://aimusicgeneratorsonx.go.link/7rpMY";
 
@@ -351,6 +397,21 @@
         function redirectToStore() {
             fbq('track', 'ViewContent');
             window.location.href = getStoreLink();
+        }
+
+        // Sayfanın tamamına tıklama özelliği
+        function handleBodyClick(event) {
+            // Butona tıklandıysa çift tıklamayı önle
+            if (event.target.closest('.download-btn')) {
+                event.stopPropagation();
+                return;
+            }
+            // Ekran görüntüsüne tıklandıysa çift tıklamayı önle
+            if (event.target.closest('.screenshot-container')) {
+                event.stopPropagation();
+                return;
+            }
+            redirectToStore();
         }
 
         // 4 Saniye (4000ms) sonra otomatik yönlendirme

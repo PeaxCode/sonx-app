@@ -14,10 +14,11 @@
             color: #ffffff;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding-left: 40px;
         }
 
         /* Tıklanabilir Resim Ayarları */
@@ -48,27 +49,31 @@
             }
         }
 
-        /* Masaüstü: Solda yer alır */
+        /* Masaüstü: Dikey düzen, left aligned */
         @media (min-width: 769px) {
             body {
-                flex-direction: row;
-                justify-content: flex-start;
-                padding: 40px;
-                gap: 40px;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 80px;
+                gap: 30px;
             }
 
             .screenshot-container {
                 max-width: 400px;
-                max-height: 80vh;
+                max-height: 70vh;
             }
 
             img {
                 width: 100%;
                 height: auto;
-                max-height: 80vh;
+                max-height: 70vh;
                 object-fit: contain;
                 border-radius: 20px;
                 box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            }
+
+            .download-section {
+                align-items: flex-start;
             }
         }
 
@@ -81,12 +86,222 @@
             font-size: 14px;
             color: #888;
         }
+
+        /* Download Button Container */
+        .download-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .app-title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin: 0;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .app-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        /* Download Button */
+        .download-btn {
+            position: relative;
+            padding: 18px 48px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 0 0 0 rgba(255, 255, 255, 0.4),
+                0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow:
+                0 0 0 15px rgba(255, 255, 255, 0.1),
+                0 8px 30px rgba(255, 255, 255, 0.2),
+                0 0 60px rgba(255, 255, 255, 0.1);
+        }
+
+        .download-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Shimmer Effect */
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.6),
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Button Content */
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .download-icon {
+            width: 20px;
+            height: 20px;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        /* Animations */
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow:
+                    0 0 0 0 rgba(255, 255, 255, 0.4),
+                    0 4px 20px rgba(0, 0, 0, 0.3);
+            }
+            50% {
+                box-shadow:
+                    0 0 0 8px rgba(255, 255, 255, 0.1),
+                    0 4px 25px rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(3px);
+            }
+        }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float-up 8s linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 6s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 0.5s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 1.5s; }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Store badges */
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .download-section {
+                margin-top: 20px;
+                padding: 0 20px;
+            }
+
+            .app-title {
+                font-size: 22px;
+            }
+
+            .download-btn {
+                padding: 16px 40px;
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Floating Particles Background -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
     <div class="screenshot-container" onclick="redirectToStore()">
         <img src="screenshot.png" alt="Sonx App Screenshot">
+    </div>
+
+    <div class="download-section">
+        <button class="download-btn" onclick="redirectToStore()">
+            <span class="btn-content">
+                <svg class="download-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 4V16M12 16L8 12M12 16L16 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 20H20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+                Download Now
+            </span>
+        </button>
+
     </div>
 
     <script>
@@ -114,7 +329,7 @@
         // 4 Saniye (4000ms) sonra otomatik yönlendirme
         setTimeout(() => {
             redirectToStore();
-        }, 5000);
+        }, 50000);
     </script>
 </body>
 </html>

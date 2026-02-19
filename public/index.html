@@ -349,6 +349,7 @@
         }
 
         function redirectToStore() {
+            fbq('track', 'ViewContent');
             window.location.href = getStoreLink();
         }
 

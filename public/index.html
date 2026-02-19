@@ -32,20 +32,23 @@
             body {
                 justify-content: flex-start;
                 padding: 0;
+                align-items: center;
             }
 
             .screenshot-container {
-                width: 100%;
-                max-width: 100%;
-                height: 100vh;
+                width: 95%;
+                max-width: 95%;
+                height: auto;
+                max-height: 45vh;
+                margin-top: 10px;
             }
 
             img {
                 width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 0;
-                box-shadow: none;
+                height: auto;
+                object-fit: contain;
+                border-radius: 16px;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
             }
         }
 
@@ -257,7 +260,10 @@
         @media (max-width: 768px) {
             .download-section {
                 margin-top: 20px;
-                padding: 0 20px;
+                padding: 380px 24px;
+                width: 85%;
+                box-sizing: border-box;
+                align-items: center;
             }
 
             .app-title {
@@ -265,8 +271,11 @@
             }
 
             .download-btn {
-                padding: 16px 40px;
+                padding: 14px 32px;
                 font-size: 15px;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
             }
         }
     </style>
